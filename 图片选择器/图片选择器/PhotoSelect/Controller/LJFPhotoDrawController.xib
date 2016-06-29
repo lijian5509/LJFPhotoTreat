@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LJFPhotoDrawController">
+            <connections>
+                <outlet property="imageView" destination="Jtc-LG-RDr" id="KN9-bE-Pos"/>
+                <outlet property="toolBar_bottom_constraint" destination="7tX-dj-I6m" id="Ji5-qb-grl"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Jtc-LG-RDr" customClass="LJFScrawView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                </imageView>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcR-yK-u10">
+                    <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="XBk-AJ-iZ8"/>
+                    </constraints>
+                    <items>
+                        <barButtonItem title="重绘" id="whx-vR-dg0">
+                            <color key="tintColor" red="1" green="0.40977967500000001" blue="0.3036001713" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="resetImageView:" destination="-1" id="Hvc-3g-vKb"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="Bgm-lV-zUO"/>
+                        <barButtonItem title="裁剪" id="8ba-BZ-pIO">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="cropImageView:" destination="-1" id="3nZ-Vm-Tey"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="XcR-yK-u10" secondAttribute="bottom" id="7tX-dj-I6m"/>
+                <constraint firstItem="Jtc-LG-RDr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GQ3-Ld-ETs"/>
+                <constraint firstAttribute="trailing" secondItem="XcR-yK-u10" secondAttribute="trailing" id="Kkd-Et-Vdw"/>
+                <constraint firstAttribute="bottom" secondItem="Jtc-LG-RDr" secondAttribute="bottom" id="LHQ-Mr-n9V"/>
+                <constraint firstItem="XcR-yK-u10" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lvf-Mk-lZE"/>
+                <constraint firstAttribute="trailing" secondItem="Jtc-LG-RDr" secondAttribute="trailing" id="oa5-R2-1Uv"/>
+                <constraint firstItem="Jtc-LG-RDr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zrh-y9-SQU"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <point key="canvasLocation" x="139" y="306"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bg.jpg" width="1000" height="667"/>
+    </resources>
+</document>

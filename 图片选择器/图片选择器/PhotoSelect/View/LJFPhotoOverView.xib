@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LJFPhotoOverView">
+            <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HY-L1-qfN">
+                    <rect key="frame" x="0.0" y="276" width="568" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="Y6J-IZ-ply"/>
+                    </constraints>
+                    <items>
+                        <barButtonItem systemItem="cancel" id="Lv5-H4-SY6">
+                            <color key="tintColor" red="0.0" green="0.40784313729999999" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="cancel:" destination="iN0-l3-epB" id="2wE-0U-3KL"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="uxb-X7-DNm"/>
+                        <barButtonItem title="拍照" id="XTd-r9-IMX">
+                            <color key="tintColor" red="1" green="0.40977967500000001" blue="0.3036001713" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="takePhoto:" destination="iN0-l3-epB" id="wbS-Wl-gIX"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sD4-5k-GJe">
+                    <rect key="frame" x="0.0" y="0.0" width="568" height="276"/>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="sD4-5k-GJe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4nt-Jp-GOn"/>
+                <constraint firstItem="5HY-L1-qfN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4qm-pw-da0"/>
+                <constraint firstAttribute="trailing" secondItem="5HY-L1-qfN" secondAttribute="trailing" id="8Oq-Ww-WXm"/>
+                <constraint firstItem="sD4-5k-GJe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="O2e-M3-msG"/>
+                <constraint firstItem="5HY-L1-qfN" firstAttribute="top" secondItem="sD4-5k-GJe" secondAttribute="bottom" id="bcV-dP-O6f"/>
+                <constraint firstAttribute="trailing" secondItem="sD4-5k-GJe" secondAttribute="trailing" id="thM-fG-0bf"/>
+                <constraint firstAttribute="bottom" secondItem="5HY-L1-qfN" secondAttribute="bottom" id="vjl-uI-F0T"/>
+            </constraints>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <connections>
+                <outlet property="backImageView" destination="sD4-5k-GJe" id="E9m-EL-OIT"/>
+            </connections>
+            <point key="canvasLocation" x="375" y="256"/>
+        </view>
+    </objects>
+</document>
