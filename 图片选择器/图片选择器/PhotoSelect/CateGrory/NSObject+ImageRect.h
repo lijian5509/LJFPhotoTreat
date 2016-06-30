@@ -55,4 +55,14 @@
  */
 - (UIImage *)imageFromImage:(UIImage *)image inRect:(CGRect)rect;
 
+/**
+ *  图片压缩到指定大小
+ *
+ *  @param originalImage originalImage description
+ *  @param size          size description
+ *
+ *  @return return value description
+ */
+- (NSData *)pressImageWithImage:(UIImage *)originalImage size:(float)size;
+
 @end

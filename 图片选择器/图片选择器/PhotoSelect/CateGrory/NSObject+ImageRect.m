@@ -72,5 +72,16 @@
 }
 
 
+#pragma mark - 压缩图片
+- (NSData *)pressImageWithImage:(UIImage *)originalImage size:(float)size
+{
+    NSData *data = UIImageJPEGRepresentation(originalImage, 1);
+    float scale = 1;
+    if (data.length > size) {
+        scale = size/data.length;
+    }
+    return UIImageJPEGRepresentation(originalImage, scale);
+}
+
 
 @end

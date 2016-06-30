@@ -42,7 +42,6 @@ typedef void(^SingleSelectFinishBlcok)(UIImage *image);
  *  是否支持多选 默认为no
  */
 @property (nonatomic) BOOL isSupportMultipleSelect;
-
 /**
  *  多选回调block
  */

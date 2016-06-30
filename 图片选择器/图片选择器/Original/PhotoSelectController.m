@@ -31,7 +31,7 @@
             self.title = [NSString stringWithFormat:@"已选择%ld张照片",resultArray.count];
             LJFAssetModel *model = [resultArray firstObject];
             UIImage *image = [UIImage imageWithCGImage:[model.representation fullScreenImage]];
-            self.imageView.image = image;
+            self.imageView.image = [image drawImageWithBackColor:[UIColor blackColor] targetSize:CGSizeMake(30, 40)];
         }];
         [self presentViewController:VC animated:YES completion:nil];
     }else{
@@ -41,7 +41,5 @@
         }];
         [self presentViewController:VC animated:YES completion:nil];
     }
-    
-    
 }
 @end

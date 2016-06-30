@@ -1,13 +1,13 @@
 //
-//  CircularClipView.h
+//  CircularClipView.m
 //  MasonryDemo
 //
-//  Created by 杨淑园 on 15/11/17.
-//  Copyright © 2015年 yangshuyaun. All rights reserved.
+//  Created by Lone on 16/6/30.
+//  Copyright © 2016年 Lone. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-@class YSHYClipViewController;
+@class LJFPhotoClipController;
 typedef enum{
     CIRCULARCLIP   = 0,   //圆形裁剪
     SQUARECLIP            //方形裁剪
@@ -15,7 +15,7 @@ typedef enum{
 }ClipType;
 
 
-@interface YSHYClipViewController : UIViewController<UIGestureRecognizerDelegate>
+@interface LJFPhotoClipController : UIViewController<UIGestureRecognizerDelegate>
 {
     UIImageView *_imageView;
     UIImage *_image;

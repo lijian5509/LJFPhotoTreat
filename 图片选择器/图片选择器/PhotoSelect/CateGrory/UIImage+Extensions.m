@@ -12,6 +12,13 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 
 @implementation UIImage (CS_Extensions)
 
+/**
+ *  image 截屏
+ *
+ *  @param rect rect description
+ *
+ *  @return return value description
+ */
 -(UIImage *)imageAtRect:(CGRect)rect
 {
     
@@ -62,7 +69,6 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
             thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
         }
     }
-    
     
     // this is actually the interesting part:
     
@@ -147,42 +153,21 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 }
 
 
+/**
+ *  自定义绘制大小
+ *
+ *  @param targetSize 目标大小
+ *
+ *  @return return value description
+ */
 - (UIImage *)imageByScalingToSize:(CGSize)targetSize {
     
-    UIImage *sourceImage = self;
-    UIImage *newImage = nil;
-    
-    //   CGSize imageSize = sourceImage.size;
-    //   CGFloat width = imageSize.width;
-    //   CGFloat height = imageSize.height;
-    
-    CGFloat targetWidth = targetSize.width;
-    CGFloat targetHeight = targetSize.height;
-    
-    //   CGFloat scaleFactor = 0.0;
-    CGFloat scaledWidth = targetWidth;
-    CGFloat scaledHeight = targetHeight;
-    
-    CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
-    
-    // this is actually the interesting part:
-    
-    UIGraphicsBeginImageContext(targetSize);
-    
-    CGRect thumbnailRect = CGRectZero;
-    thumbnailRect.origin = thumbnailPoint;
-    thumbnailRect.size.width  = scaledWidth;
-    thumbnailRect.size.height = scaledHeight;
-    
-    [sourceImage drawInRect:thumbnailRect];
-    
-    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsBeginImageContext(CGSizeMake(targetSize.width, targetSize.height));
+    [self drawInRect:CGRectMake(0, 0, targetSize.width, targetSize.height)];
+    UIImage *reSizeImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    if(newImage == nil) NSLog(@"could not scale image");
-    
-    
-    return newImage ;
+    return reSizeImage ;
 }
 
 
@@ -217,6 +202,64 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     UIGraphicsEndImageContext();
     return newImage;
     
+}
+
+//等比例缩放
+-(UIImage *)scaleToSize:(CGSize)size
+{
+    CGFloat width = CGImageGetWidth(self.CGImage);
+    CGFloat height = CGImageGetHeight(self.CGImage);
+    
+    float radio = MIN(size.width/width, size.height/height);
+    
+    width = width*radio;
+    height = height*radio;
+    // 创建一个bitmap的context
+    // 并把它设置成为当前正在使用的context
+    UIGraphicsBeginImageContext(size);
+
+    /** 计算相对于画布的x,y 坐标值*/
+    int xPos = (size.width/2 - width * radio / 2);
+    int yPos = (size.height/2 - height * radio / 2 );
+    // 绘制改变大小的图片
+    [self drawInRect:CGRectMake(xPos, yPos, width * radio, height * radio)];
+    
+    // 从当前context中创建一个改变大小后的图片
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    
+    // 返回新的改变大小后的图片
+    return scaledImage;
+}
+
+- (UIImage *)drawImageWithBackColor:(UIColor *)color targetSize:(CGSize)size
+{
+    CGFloat width = CGImageGetWidth(self.CGImage);
+    CGFloat height = CGImageGetHeight(self.CGImage);
+    // 创建一个bitmap的context
+    // 并把它设置成为当前正在使用的context
+    UIGraphicsBeginImageContext(size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height));
+    
+    CGFloat radio = MIN(size.width/width, size.height/height);
+    
+    /** 计算相对于画布的x,y 坐标值*/
+    int xPos = (size.width/2 - width * radio / 2);
+    int yPos = (size.height/2 - height * radio / 2 );
+    // 绘制改变大小的图片
+    [self drawInRect:CGRectMake(xPos, yPos, width * radio, height * radio)];
+    
+    // 从当前context中创建一个改变大小后的图片
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    
+    return scaledImage;
 }
 
 @end;

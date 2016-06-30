@@ -2,16 +2,16 @@
 //  CircularClipView.m
 //  MasonryDemo
 //
-//  Created by 杨淑园 on 15/11/17.
-//  Copyright © 2015年 yangshuyaun. All rights reserved.
+//  Created by Lone on 16/6/30.
+//  Copyright © 2016年 Lone. All rights reserved.
 //
 
-#import "YSHYClipViewController.h"
-@interface YSHYClipViewController ()
+#import "LJFPhotoClipController.h"
+@interface LJFPhotoClipController ()
 
 @end
 
-@implementation YSHYClipViewController
+@implementation LJFPhotoClipController
 
 -(instancetype)initWithImage:(UIImage *)image
 {
@@ -36,22 +36,29 @@
 #pragma mark - 添加导航栏右按钮
 - (void)addNaviGationBarItem
 {
-    UIBarButtonItem * rightItem = [[UIBarButtonItem alloc] initWithTitle:@"下一步"
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(sureBtnClicked)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+    UIButton *sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    sureBtn.frame = CGRectMake(3, 0, 50, 44);
+    [sureBtn setTitle:@"下一步" forState:UIControlStateNormal];
+    [sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    sureBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    sureBtn.enabled = NO;
+    [sureBtn addTarget:self action:@selector(sureBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sureBtn];
 }
 
 #pragma mark - 确认
-- (void)sureBtnClicked
+- (void)sureBtnClicked:(UIButton *)sender
 {
     LJFPhotoDrawController * VC = [[LJFPhotoDrawController alloc] init];
     VC.originalImage = _image;
     [self.navigationController pushViewController:VC animated:YES];
 }
 
-#pragma mark - 添加子视图
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
+
 -(void)configUI
 {
     //验证 裁剪半径是否有效
@@ -60,17 +67,17 @@
     
     _imageView = [[UIImageView alloc]init];
     [_imageView setImage:_image];
-    CGSize size = [self calculateViewFitSizeWithImage:_image planWidth:CGRectGetWidth(self.view.frame)
-                                           planHeight:CGRectGetHeight(self.view.frame)];
+    CGSize size = [self calculateViewFitSizeWithImage:_image planWidth:self.view.frame.size.width planHeight:self.view.frame.size.height];
     [_imageView setFrame:CGRectMake(0, 0, size.width, size.height)];
     [_imageView setCenter:self.view.center];
     self.originalFrame = _imageView.frame;
     [self.view addSubview:_imageView];
     
     //覆盖层
-    _overView = [[UIView alloc]initWithFrame:self.view.frame];
+    _overView = [[UIView alloc]init];
     [_overView setBackgroundColor:[UIColor clearColor]];
     _overView.opaque = NO;
+    [_overView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height )];
     [self.view addSubview:_overView];
     
     UIButton * clipBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -82,6 +89,12 @@
     
     [self drawClipPath:self.clipType];
 }
+
+- (void)setClipSize:(CGSize)clipSize
+{
+    _clipSize = clipSize;
+}
+
 #pragma mark - 绘制裁剪边框
 -(void)drawClipPath:(ClipType )clipType
 {
@@ -93,9 +106,9 @@
     }
     UIBezierPath * path= [UIBezierPath bezierPathWithRect:CGRectMake(0, 64, ScreenWidth, ScreenHeight)];
     CAShapeLayer *layer = [CAShapeLayer layer];
+    //绘制圆形裁剪区域
     if(clipType == CIRCULARCLIP)
     {
-        //绘制圆形裁剪区域
         [path  appendPath:[UIBezierPath bezierPathWithArcCenter:self.view.center radius:self.radius startAngle:0 endAngle:2*M_PI clockwise:NO]];
     }
     else
@@ -132,20 +145,29 @@
     else if(pinGesture.state == UIGestureRecognizerStateEnded)
     {
         CGFloat ration =  view.frame.size.width /self.originalFrame.size.width;
+        /**
+         *  当放大倍数大于设定的放大倍数的时候 图片的size 设置成原始size * 放大倍数
+         */
         if(ration>_scaleRation)
         {
             CGRect newFrame =CGRectMake(0, 0, self.originalFrame.size.width * _scaleRation, self.originalFrame.size.height * _scaleRation);
             view.frame = newFrame;
-            
-        }else if (view.frame.size.width < self.circularFrame.size.width || view.frame.size.height< self.circularFrame.size.height)
+            /**
+             *  当缩小的比例的长宽都小玉裁剪框时，以最接近裁剪框的宽度或者长度为基准，等比例放大直至已属性长度和裁剪框长度相等
+             */
+        }else if (view.frame.size.width < self.circularFrame.size.width && view.frame.size.height< self.circularFrame.size.height)
         {
             CGFloat rat = self.originalFrame.size.height / self.originalFrame.size.width;
-            CGFloat newHeight = self.circularFrame.size.width * rat;
-            CGFloat newWidth  = self.circularFrame.size.width;
-            if (newHeight < view.frame.size.height< self.circularFrame.size.height) {
+            CGFloat newHeight;
+            CGFloat newWidth;
+            if (rat > 1) {//若高度大与宽度 已高为准
                 newHeight = self.circularFrame.size.height;
-                newWidth = newWidth * self.circularFrame.size.height /newHeight;
+                newWidth  = self.circularFrame.size.height/rat;
+            }else{
+                newWidth = self.circularFrame.size.width;
+                newHeight  = self.circularFrame.size.width * rat;
             }
+            
             CGRect newFrame =CGRectMake(0, 0, newWidth,newHeight);
             view.frame = newFrame;
         }
@@ -160,42 +182,31 @@
     UIView * view = _imageView;
     if(panGesture.state == UIGestureRecognizerStateBegan || panGesture.state == UIGestureRecognizerStateChanged)
     {
+        /**
+         *  坐标点转换
+         */
         CGPoint translation = [panGesture translationInView:view.superview];
         [view setCenter:CGPointMake(view.center.x + translation.x, view.center.y + translation.y)];
         [panGesture setTranslation:CGPointZero inView:view.superview];
     }
     else if ( panGesture.state == UIGestureRecognizerStateEnded)
     {
+        //坐标转换 相对于当前视图 这样比较精准
         CGRect currentFrame = [self.view convertRect:_imageView.frame toView:self.view];
-        //向右滑动 并且超出裁剪范围后
-        if(currentFrame.origin.x >= self.circularFrame.origin.x)
+        //超出四个角居中 以四个角为界限，只要超出一角就要默认居中
+        if((currentFrame.origin.x >= self.circularFrame.origin.x && currentFrame.origin.y >= self.circularFrame.origin.y)
+           || (currentFrame.size.width + currentFrame.origin.x < self.circularFrame.origin.x + self.circularFrame.size.width && currentFrame.origin.y >= self.circularFrame.origin.y)
+           || (currentFrame.size.height+currentFrame.origin.y < self.circularFrame.origin.y + self.circularFrame.size.height && currentFrame.origin.x >= self.circularFrame.origin.x)
+           || (currentFrame.size.height+currentFrame.origin.y < self.circularFrame.origin.y + self.circularFrame.size.height && currentFrame.size.width + currentFrame.origin.x < self.circularFrame.origin.x + self.circularFrame.size.width))
         {
-            currentFrame.origin.x = self.circularFrame.origin.x;
+            [UIView animateWithDuration:0.05 animations:^{
+                view.center = self.view.center;
+            }];
         }
-        //向下滑动 并且超出裁剪范围后
-        if(currentFrame.origin.y >= self.circularFrame.origin.y)
-        {
-            currentFrame.origin.y = self.circularFrame.origin.y;
-        }
-        //向左滑动 并且超出裁剪范围后
-        if(currentFrame.size.width + currentFrame.origin.x < self.circularFrame.origin.x + self.circularFrame.size.width)
-        {
-            CGFloat movedLeftX =fabs(currentFrame.size.width + currentFrame.origin.x -(self.circularFrame.origin.x + self.circularFrame.size.width));
-            currentFrame.origin.x += movedLeftX;
-        }
-        //向上滑动 并且超出裁剪范围后
-        if(currentFrame.size.height+currentFrame.origin.y < self.circularFrame.origin.y + self.circularFrame.size.height)
-        {
-            CGFloat moveUpY =fabs(currentFrame.size.height + currentFrame.origin.y -(self.circularFrame.origin.y + self.circularFrame.size.height));
-            currentFrame.origin.y += moveUpY;
-        }
-        [UIView animateWithDuration:0.05 animations:^{
-            view.frame = currentFrame;
-        }];
     }
 }
 
-#pragma mark - 裁剪按钮触发
+#pragma mark - 裁剪
 -(void)clipBtnSelected:(UIButton *)btn
 {
     LJFPhotoDrawController * VC = [[LJFPhotoDrawController alloc] init];
@@ -276,9 +287,7 @@
 #pragma mark - 方形裁剪
 -(UIImage *)getSmallImage
 {
-    CGFloat width= _imageView.frame.size.width;
-    CGFloat rationScale = (width /_image.size.width);
-    
+    CGFloat rationScale = (_imageView.frame.size.width /_image.size.width);
     CGRect rect1 = [self.view convertRect:self.circularFrame toView:self.view];
     CGRect rect2 = [self.view convertRect:_imageView.frame toView:self.view];
     
