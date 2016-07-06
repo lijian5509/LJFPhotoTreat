@@ -93,7 +93,13 @@ typedef enum : NSUInteger {
 - (void)drawingImage
 {
     if (self.brush) {
-        UIGraphicsBeginImageContext(self.bounds.size);
+        if ([[UIScreen mainScreen] scale] == 2.0) {
+            UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 4);
+        }else if ([[UIScreen mainScreen] scale] == 3.0){
+            UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 6);
+        }else{
+            UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 2);
+        }
         CGContextRef context = UIGraphicsGetCurrentContext();
         [self.image drawInRect:[self getFrameSizeForImage:self.image inImageView:self]];
         CGContextSetLineCap(context, kCGLineCapRound);
