@@ -51,7 +51,7 @@
                                     <action selector="btnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="thG-qf-Tit"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DAe-Ff-5GW">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DAe-Ff-5GW">
                                 <rect key="frame" x="180" y="228" width="240" height="271"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="Ch5-kC-2IR"/>

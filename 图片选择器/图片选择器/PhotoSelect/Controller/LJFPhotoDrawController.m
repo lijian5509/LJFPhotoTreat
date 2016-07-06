@@ -13,11 +13,9 @@
 
 @property (nonatomic, strong) UIImage *fixedImage;          /**<编辑的图片>*/
 
-@property (weak, nonatomic) IBOutlet LJFScrawView *imageView;
+@property (strong, nonatomic) LJFScrawView *imageView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolBar_bottom_constraint;
-
-@property (nonatomic, strong) UIImageView *backImageView;
 /**
  *  工具栏显示状态
  */
@@ -28,18 +26,23 @@
 
 @implementation LJFPhotoDrawController
 
-- (UIImageView *)backImageView
-{
-    if (!_backImageView) {
-        _backImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    }
-    return _backImageView;
-}
-
 - (void)setOriginalImage:(UIImage *)originalImage
 {
     _originalImage = originalImage;
     self.fixedImage = originalImage;
+}
+
+- (LJFScrawView *)imageView
+{
+    if (!_imageView) {
+        _imageView = [[LJFScrawView alloc] init];
+        CGSize size = [self calculateViewFitSizeWithImage:self.originalImage
+                                                planWidth:ScreenWidth
+                                               planHeight:ScreenHeight];
+        _imageView.frame = CGRectMake(0, 0, size.width, size.height);
+        _imageView.center = self.view.center;
+    }
+    return _imageView;
 }
 
 - (void)setFixedImage:(UIImage *)fixedImage
@@ -64,6 +67,7 @@
     self.imageView.strokeColor = [UIColor whiteColor];
     self.imageView.image = self.fixedImage;
     self.imageView.realImage = nil;
+    [self.view addSubview:self.imageView];
 }
 
 #pragma mark - 添加导航栏右按钮

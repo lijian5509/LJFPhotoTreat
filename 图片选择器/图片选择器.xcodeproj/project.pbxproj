@@ -14,6 +14,9 @@
 		048727591D18DAF00064BA1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048727571D18DAF00064BA1C /* LaunchScreen.storyboard */; };
 		048727671D18DBCB0064BA1C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 048727631D18DBCB0064BA1C /* AppDelegate.m */; };
 		048727681D18DBCB0064BA1C /* PhotoSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048727651D18DBCB0064BA1C /* PhotoSelectController.m */; };
+		04EE758B1D277F2A00760653 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04EE758A1D277F2A00760653 /* 1.jpg */; };
+		04EE762E1D2CA2FA00760653 /* LJFTakePhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EE762D1D2CA2FA00760653 /* LJFTakePhotoController.m */; };
+		04EE76311D2CD42A00760653 /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EE76301D2CD42A00760653 /* UIImage+Rotate.m */; };
 		04F360681D1E87250050E0C8 /* CALayer+Transition.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F360391D1E87250050E0C8 /* CALayer+Transition.m */; };
 		04F360691D1E87250050E0C8 /* NSObject+ImageRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3603B1D1E87250050E0C8 /* NSObject+ImageRect.m */; };
 		04F3606A1D1E87250050E0C8 /* UIColor+Tweak.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3603D1D1E87250050E0C8 /* UIColor+Tweak.m */; };
@@ -61,6 +64,11 @@
 		048727631D18DBCB0064BA1C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		048727641D18DBCB0064BA1C /* PhotoSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSelectController.h; sourceTree = "<group>"; };
 		048727651D18DBCB0064BA1C /* PhotoSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSelectController.m; sourceTree = "<group>"; };
+		04EE758A1D277F2A00760653 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		04EE762C1D2CA2FA00760653 /* LJFTakePhotoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJFTakePhotoController.h; sourceTree = "<group>"; };
+		04EE762D1D2CA2FA00760653 /* LJFTakePhotoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJFTakePhotoController.m; sourceTree = "<group>"; };
+		04EE762F1D2CD42A00760653 /* UIImage+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Rotate.h"; sourceTree = "<group>"; };
+		04EE76301D2CD42A00760653 /* UIImage+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rotate.m"; sourceTree = "<group>"; };
 		04F360381D1E87250050E0C8 /* CALayer+Transition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Transition.h"; sourceTree = "<group>"; };
 		04F360391D1E87250050E0C8 /* CALayer+Transition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Transition.m"; sourceTree = "<group>"; };
 		04F3603A1D1E87250050E0C8 /* NSObject+ImageRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ImageRect.h"; sourceTree = "<group>"; };
@@ -172,6 +180,7 @@
 				048727631D18DBCB0064BA1C /* AppDelegate.m */,
 				048727641D18DBCB0064BA1C /* PhotoSelectController.h */,
 				048727651D18DBCB0064BA1C /* PhotoSelectController.m */,
+				04EE758A1D277F2A00760653 /* 1.jpg */,
 			);
 			path = Original;
 			sourceTree = "<group>";
@@ -200,6 +209,8 @@
 				04F3603D1D1E87250050E0C8 /* UIColor+Tweak.m */,
 				04F3603E1D1E87250050E0C8 /* UIImage+Extensions.h */,
 				04F3603F1D1E87250050E0C8 /* UIImage+Extensions.m */,
+				04EE762F1D2CD42A00760653 /* UIImage+Rotate.h */,
+				04EE76301D2CD42A00760653 /* UIImage+Rotate.m */,
 			);
 			path = CateGrory;
 			sourceTree = "<group>";
@@ -223,6 +234,8 @@
 				04F3604E1D1E87250050E0C8 /* LJFPhotoTweaksController.m */,
 				041A17061D236AF400629CF2 /* LJFPhotoClipController.h */,
 				041A17071D236AF400629CF2 /* LJFPhotoClipController.m */,
+				04EE762C1D2CA2FA00760653 /* LJFTakePhotoController.h */,
+				04EE762D1D2CA2FA00760653 /* LJFTakePhotoController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -341,6 +354,7 @@
 				048727591D18DAF00064BA1C /* LaunchScreen.storyboard in Resources */,
 				04F360701D1E87250050E0C8 /* LJFPhotoDrawController.xib in Resources */,
 				04F360771D1E87250050E0C8 /* for0.png in Resources */,
+				04EE758B1D277F2A00760653 /* 1.jpg in Resources */,
 				04F3607A1D1E87250050E0C8 /* PhotoTweaks.strings in Resources */,
 				04F3607D1D1E87250050E0C8 /* select_s@2x.png in Resources */,
 				04F361531D211A250050E0C8 /* LJFAlbumTableViewCell.xib in Resources */,
@@ -371,7 +385,9 @@
 				04F360731D1E87250050E0C8 /* LJFPhotoTweaksController.m in Sources */,
 				04F3606A1D1E87250050E0C8 /* UIColor+Tweak.m in Sources */,
 				04F3606C1D1E87250050E0C8 /* LJFAlbumsListController.m in Sources */,
+				04EE76311D2CD42A00760653 /* UIImage+Rotate.m in Sources */,
 				04F360881D1E880A0050E0C8 /* LJFBaseBrush.m in Sources */,
+				04EE762E1D2CA2FA00760653 /* LJFTakePhotoController.m in Sources */,
 				04F360681D1E87250050E0C8 /* CALayer+Transition.m in Sources */,
 				04F360851D1E87E30050E0C8 /* LJFPencilBrush.m in Sources */,
 				04F360821D1E87250050E0C8 /* LJFPhotoViewCell.m in Sources */,

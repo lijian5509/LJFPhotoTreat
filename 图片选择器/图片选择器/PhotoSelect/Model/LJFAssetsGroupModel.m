@@ -15,11 +15,32 @@
     self = [super init];
     if (self) {
         self.assetsGroup   = assetsGroup;
-        self.assetsName    = [assetsGroup valueForProperty:ALAssetsGroupPropertyName];
-        self.posterImage   = [UIImage imageWithCGImage:assetsGroup.posterImage];
-        self.assetsNumbers = [assetsGroup numberOfAssets];
     }
     return  self;
+}
+
+- (NSString *)assetsName
+{
+    if (self.assetsGroup) {
+        return [self.assetsGroup valueForProperty:ALAssetsGroupPropertyName];
+    }
+    return nil;
+}
+
+- (UIImage *)posterImage
+{
+    if (self.assetsGroup) {
+        return [UIImage imageWithCGImage:self.assetsGroup.posterImage];
+    }
+    return nil;
+}
+
+- (NSInteger)assetsNumbers
+{
+    if (self.assetsGroup) {
+        return [self.assetsGroup numberOfAssets];
+    }
+    return 0;
 }
 
 @end

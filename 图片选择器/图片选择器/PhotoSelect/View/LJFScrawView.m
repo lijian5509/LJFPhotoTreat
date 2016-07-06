@@ -52,7 +52,7 @@ typedef enum : NSUInteger {
 {
     self.strokeWidth = 8;
     self.strokeColor = [UIColor greenColor];
-    self.contentMode = UIViewContentModeScaleAspectFit;
+    self.contentMode = UIViewContentModeScaleToFill;
     self.userInteractionEnabled = YES;
     self.imageRect   = [self getFrameSizeForImage:self.image inImageView:self];
     

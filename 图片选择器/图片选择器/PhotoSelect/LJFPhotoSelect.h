@@ -27,6 +27,8 @@
 #import "LJFPencilBrush.h"
 #import "LJFScrawView.h"
 #import "LJFPhotoDrawController.h"
+#import "LJFTakePhotoController.h"
+#import "UIImage+Rotate.h"
 
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width

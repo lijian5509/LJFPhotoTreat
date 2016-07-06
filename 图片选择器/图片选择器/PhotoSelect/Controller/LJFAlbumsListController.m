@@ -11,7 +11,8 @@
 #import "LJFPhotoOverView.h"
 #import "LJFAlbumTableViewCell.h"
 
-@interface LJFAlbumsListController ()<UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface LJFAlbumsListController ()<UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,
+UINavigationControllerDelegate,LJFTakePhotoControllerDelegate>
 
 @end
 
@@ -61,24 +62,38 @@
 #pragma mark - 拍照
 - (void)takePhoto
 {
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePicker.showsCameraControls = NO;
-    imagePicker.allowsEditing = YES;
-    imagePicker.delegate = self;
-    LJFPhotoOverView *overView = [[[NSBundle mainBundle] loadNibNamed:@"LJFPhotoOverView"
-                                                                owner:self
-                                                              options:nil]lastObject];
-    overView.backImageView.image = [UIImage imageNamed:@"for0"];
-    overView.frame = imagePicker.cameraOverlayView.frame;
-    imagePicker.cameraOverlayView = overView;
-    overView.pickerControl = imagePicker;
-    imagePicker.navigationBarHidden = YES;
-    CGAffineTransform cameraTransform = CGAffineTransformScale(imagePicker.cameraViewTransform,1.5,1.5);
-    imagePicker.cameraViewTransform = cameraTransform;
-    [self presentViewController:imagePicker
-                       animated:YES
-                     completion:nil];
+    LJFTakePhotoController *VC = [[LJFTakePhotoController alloc] initWithDelegate:self
+                                                             takePhotoOrientation:TakePhotoOrientationRight];
+    VC.backImage = [UIImage imageNamed:@"for0"];
+    [self presentViewController:VC animated:YES completion:nil];
+//    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+//    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    imagePicker.showsCameraControls = NO;
+//    imagePicker.allowsEditing = YES;
+//    imagePicker.delegate = self;
+//    LJFPhotoOverView *overView = [[[NSBundle mainBundle] loadNibNamed:@"LJFPhotoOverView"
+//                                                                owner:self
+//                                                              options:nil]lastObject];
+//    overView.backImageView.image = [UIImage imageNamed:@"for0"];
+//    overView.frame = imagePicker.cameraOverlayView.frame;
+//    imagePicker.cameraOverlayView = overView;
+//    overView.pickerControl = imagePicker;
+//    imagePicker.navigationBarHidden = YES;
+//    CGAffineTransform cameraTransform = CGAffineTransformScale(imagePicker.cameraViewTransform,1.5,1.5);
+//    imagePicker.cameraViewTransform = cameraTransform;
+//    [self presentViewController:imagePicker
+//                       animated:YES
+//                     completion:nil];
+}
+
+#pragma mark - 拍照回调
+-(void)LJFTakePhotoController:(LJFTakePhotoController *)photoControl didFinishWithImage:(UIImage *)image
+{
+    [photoControl dismissViewControllerAnimated:YES completion:nil];
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+    LJFPhotoDetailController *VC = [LJFPhotoDetailController new];
+    VC.originalImage = image;
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 #pragma mark - 图片选择完毕（单选)
