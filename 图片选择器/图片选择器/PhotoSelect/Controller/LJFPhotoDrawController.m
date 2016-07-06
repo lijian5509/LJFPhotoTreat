@@ -41,6 +41,7 @@
                                                planHeight:ScreenHeight];
         _imageView.frame = CGRectMake(0, 0, size.width, size.height);
         _imageView.center = self.view.center;
+        _imageView.contentMode = UIViewContentModeScaleToFill;
     }
     return _imageView;
 }
