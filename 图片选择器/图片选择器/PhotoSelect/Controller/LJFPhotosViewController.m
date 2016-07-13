@@ -73,6 +73,7 @@ static NSString * const reuseIdentifier = @"Cell";
     _sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _sureButton.frame = CGRectMake(3, 0, 50, 44);
     [_sureButton setTitle:@"确定" forState:UIControlStateNormal];
+    _sureButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [_sureButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     _sureButton.titleLabel.font = [UIFont systemFontOfSize:15];
     _sureButton.enabled = NO;

@@ -77,6 +77,7 @@
     UIButton *sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     sureBtn.frame = CGRectMake(3, 0, 50, 44);
     [sureBtn setTitle:@"保存" forState:UIControlStateNormal];
+    sureBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [sureBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     sureBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     sureBtn.enabled = NO;

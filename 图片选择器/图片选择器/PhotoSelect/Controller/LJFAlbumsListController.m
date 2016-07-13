@@ -46,6 +46,7 @@ UINavigationControllerDelegate,LJFTakePhotoControllerDelegate>
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     cancelBtn.frame = CGRectMake(3, 0, 50, 44);
     [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+    cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [cancelBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     cancelBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     cancelBtn.enabled = NO;
