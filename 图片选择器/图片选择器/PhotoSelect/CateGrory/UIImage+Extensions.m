@@ -217,23 +217,20 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     // 创建一个bitmap的context
     // 并把它设置成为当前正在使用的context
     UIGraphicsBeginImageContext(size);
-
     /** 计算相对于画布的x,y 坐标值*/
     int xPos = (size.width/2 - width * radio / 2);
     int yPos = (size.height/2 - height * radio / 2 );
     // 绘制改变大小的图片
     [self drawInRect:CGRectMake(xPos, yPos, width * radio, height * radio)];
-    
     // 从当前context中创建一个改变大小后的图片
     UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
-    
     // 使当前的context出堆栈
     UIGraphicsEndImageContext();
-    
     // 返回新的改变大小后的图片
     return scaledImage;
 }
 
+#pragma mark - 等比例绘制图片
 - (UIImage *)drawImageWithBackColor:(UIColor *)color targetSize:(CGSize)size
 {
     CGFloat width = CGImageGetWidth(self.CGImage);

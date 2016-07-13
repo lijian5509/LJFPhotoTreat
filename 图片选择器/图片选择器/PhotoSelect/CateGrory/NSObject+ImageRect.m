@@ -49,8 +49,8 @@
     return CGSizeMake(newWidth, newHeight);
 }
 
-#pragma mark -裁剪照片
-- (UIImage *)scaleToSize:(UIImage *)image size:(CGSize)size
+#pragma mark - 图片绘制
+- (UIImage *)drawImageToSize:(UIImage *)image size:(CGSize)size
 {
     //创建一个bitmap的context
     //并把他设置成当前的context

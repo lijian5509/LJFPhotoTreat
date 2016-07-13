@@ -55,7 +55,7 @@ typedef enum : NSUInteger {
     self.contentMode = UIViewContentModeScaleToFill;
     self.userInteractionEnabled = YES;
     self.imageRect   = [self getFrameSizeForImage:self.image inImageView:self];
-    
+    [self drawingImage];
 }
 
 #pragma mark touches 回调

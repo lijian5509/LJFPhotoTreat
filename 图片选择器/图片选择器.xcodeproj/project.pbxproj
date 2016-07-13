@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		041A17081D236AF400629CF2 /* LJFPhotoClipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041A17071D236AF400629CF2 /* LJFPhotoClipController.m */; };
+		043225921D2F467200E9AC76 /* LJFPhotoCompose.m in Sources */ = {isa = PBXBuildFile; fileRef = 043225911D2F467200E9AC76 /* LJFPhotoCompose.m */; };
 		0487274B1D18DAF00064BA1C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0487274A1D18DAF00064BA1C /* main.m */; };
 		048727541D18DAF00064BA1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048727521D18DAF00064BA1C /* Main.storyboard */; };
 		048727561D18DAF00064BA1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048727551D18DAF00064BA1C /* Assets.xcassets */; };
@@ -54,6 +55,8 @@
 /* Begin PBXFileReference section */
 		041A17061D236AF400629CF2 /* LJFPhotoClipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJFPhotoClipController.h; sourceTree = "<group>"; };
 		041A17071D236AF400629CF2 /* LJFPhotoClipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJFPhotoClipController.m; sourceTree = "<group>"; };
+		043225901D2F467200E9AC76 /* LJFPhotoCompose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJFPhotoCompose.h; sourceTree = "<group>"; };
+		043225911D2F467200E9AC76 /* LJFPhotoCompose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJFPhotoCompose.m; sourceTree = "<group>"; };
 		048727461D18DAF00064BA1C /* 图片选择器.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "图片选择器.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0487274A1D18DAF00064BA1C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		048727531D18DAF00064BA1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -249,6 +252,8 @@
 				04F360541D1E87250050E0C8 /* LJFAssetsGroupModel.m */,
 				04F360551D1E87250050E0C8 /* LJFPhotoHandle.h */,
 				04F360561D1E87250050E0C8 /* LJFPhotoHandle.m */,
+				043225901D2F467200E9AC76 /* LJFPhotoCompose.h */,
+				043225911D2F467200E9AC76 /* LJFPhotoCompose.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -379,6 +384,7 @@
 				04F3606D1D1E87250050E0C8 /* LJFPhotoDetailController.m in Sources */,
 				048727671D18DBCB0064BA1C /* AppDelegate.m in Sources */,
 				04F360751D1E87250050E0C8 /* LJFAssetsGroupModel.m in Sources */,
+				043225921D2F467200E9AC76 /* LJFPhotoCompose.m in Sources */,
 				04F3606B1D1E87250050E0C8 /* UIImage+Extensions.m in Sources */,
 				04F360721D1E87250050E0C8 /* LJFPhotosViewController.m in Sources */,
 				04F3608B1D1E88210050E0C8 /* LJFScrawView.m in Sources */,

@@ -43,7 +43,7 @@
  *
  *  @return return value description
  */
-- (UIImage *)scaleToSize:(UIImage *)image size:(CGSize)size;
+- (UIImage *)drawImageToSize:(UIImage *)image size:(CGSize)size;
 
 /**
  *  图片截取
