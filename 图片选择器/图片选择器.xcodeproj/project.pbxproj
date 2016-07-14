@@ -15,6 +15,7 @@
 		048727591D18DAF00064BA1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048727571D18DAF00064BA1C /* LaunchScreen.storyboard */; };
 		048727671D18DBCB0064BA1C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 048727631D18DBCB0064BA1C /* AppDelegate.m */; };
 		048727681D18DBCB0064BA1C /* PhotoSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048727651D18DBCB0064BA1C /* PhotoSelectController.m */; };
+		04CDAAB61D3752E70016AE30 /* LJFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CDAAB51D3752E70016AE30 /* LJFAlertView.m */; };
 		04EE758B1D277F2A00760653 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04EE758A1D277F2A00760653 /* 1.jpg */; };
 		04EE762E1D2CA2FA00760653 /* LJFTakePhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EE762D1D2CA2FA00760653 /* LJFTakePhotoController.m */; };
 		04EE76311D2CD42A00760653 /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EE76301D2CD42A00760653 /* UIImage+Rotate.m */; };
@@ -67,6 +68,8 @@
 		048727631D18DBCB0064BA1C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		048727641D18DBCB0064BA1C /* PhotoSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSelectController.h; sourceTree = "<group>"; };
 		048727651D18DBCB0064BA1C /* PhotoSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSelectController.m; sourceTree = "<group>"; };
+		04CDAAB41D3752E70016AE30 /* LJFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJFAlertView.h; sourceTree = "<group>"; };
+		04CDAAB51D3752E70016AE30 /* LJFAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJFAlertView.m; sourceTree = "<group>"; };
 		04EE758A1D277F2A00760653 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		04EE762C1D2CA2FA00760653 /* LJFTakePhotoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJFTakePhotoController.h; sourceTree = "<group>"; };
 		04EE762D1D2CA2FA00760653 /* LJFTakePhotoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJFTakePhotoController.m; sourceTree = "<group>"; };
@@ -292,6 +295,8 @@
 				04F360651D1E87250050E0C8 /* LJFPhotoTweakView.m */,
 				04F360661D1E87250050E0C8 /* LJFPhotoViewCell.h */,
 				04F360671D1E87250050E0C8 /* LJFPhotoViewCell.m */,
+				04CDAAB41D3752E70016AE30 /* LJFAlertView.h */,
+				04CDAAB51D3752E70016AE30 /* LJFAlertView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -380,6 +385,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04CDAAB61D3752E70016AE30 /* LJFAlertView.m in Sources */,
 				048727681D18DBCB0064BA1C /* PhotoSelectController.m in Sources */,
 				04F3606D1D1E87250050E0C8 /* LJFPhotoDetailController.m in Sources */,
 				048727671D18DBCB0064BA1C /* AppDelegate.m in Sources */,

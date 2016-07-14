@@ -30,6 +30,7 @@
 #import "LJFTakePhotoController.h"
 #import "UIImage+Rotate.h"
 #import "LJFPhotoCompose.h"
+#import "LJFAlertView.h"
 
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width
