@@ -20,7 +20,8 @@
         _image = [self fixOrientation:image];
         self.clipType = CIRCULARCLIP;
         self.radius = 120;
-        self.scaleRation =  3;
+        self.scaleRation = 3;
+        _lastScale = 1.0;
     }
     return  self;
 }
@@ -141,7 +142,9 @@
     UIView * view = _imageView;
     if(pinGesture.state == UIGestureRecognizerStateBegan || pinGesture.state == UIGestureRecognizerStateChanged)
     {
+        pinGesture.scale = pinGesture.scale - _lastScale + 1;
         view.transform = CGAffineTransformScale(view.transform, pinGesture.scale, pinGesture.scale);
+        _lastScale = pinGesture.scale;
     }
     else if(pinGesture.state == UIGestureRecognizerStateEnded)
     {

@@ -20,6 +20,7 @@ typedef enum{
     UIImageView *_imageView;
     UIImage *_image;
     UIView * _overView;
+    CGFloat _lastScale;
 }
 @property (nonatomic, assign)CGFloat scaleRation;//图片缩放的最大倍数
 @property (nonatomic, assign)CGFloat radius; //圆形裁剪框的半径
