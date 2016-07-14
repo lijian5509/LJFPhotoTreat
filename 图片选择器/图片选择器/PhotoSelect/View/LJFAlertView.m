@@ -70,7 +70,7 @@
     if (!_defaultButton) {
         _defaultButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [_defaultButton addTarget:self action:@selector(defaultBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [_defaultButton setTitleColor:kCWTextRedColor forState:UIControlStateNormal];
+//        [_defaultButton setTitleColor:kCWTextRedColor forState:UIControlStateNormal];
     }
     return _defaultButton;
 }
@@ -195,7 +195,7 @@
     [self alertViewWithTitle:self.title
                         text:self.text];
     
-    [kWindow addSubview:self];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self];
 }
 
 @end
