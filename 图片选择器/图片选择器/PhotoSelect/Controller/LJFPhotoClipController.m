@@ -7,21 +7,28 @@
 //
 
 #import "LJFPhotoClipController.h"
+
+typedef void(^ResultBlock)(UIImage *image);
+
 @interface LJFPhotoClipController ()
+
+@property (nonatomic, copy) ResultBlock resultBlock;
 
 @end
 
 @implementation LJFPhotoClipController
 
 -(instancetype)initWithImage:(UIImage *)image
+                      rusult:(void (^)(UIImage *))result
 {
     if(self = [super init])
     {
-        _image = [self fixOrientation:image];
-        self.clipType = CIRCULARCLIP;
-        self.radius = 120;
+        _image           = [self fixOrientation:image];
+        self.clipType    = CIRCULARCLIP;
+        self.radius      = 120;
         self.scaleRation = 3;
-        _lastScale = 1.0;
+        _lastScale       = 1.0;
+        self.resultBlock = result;
     }
     return  self;
 }
@@ -37,13 +44,13 @@
 #pragma mark - 添加导航栏右按钮
 - (void)addNaviGationBarItem
 {
-    UIButton *sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    sureBtn.frame = CGRectMake(3, 0, 50, 44);
-    [sureBtn setTitle:@"下一步" forState:UIControlStateNormal];
-    sureBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UIButton *sureBtn       = [UIButton buttonWithType:UIButtonTypeCustom];
+    sureBtn.frame           = CGRectMake(3, 0, 50, 44);
     sureBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    sureBtn.enabled = NO;
+    sureBtn.enabled         = NO;
+    [sureBtn setTitle:@"下一步" forState:UIControlStateNormal];
+    sureBtn.contentHorizontalAlignment     = UIControlContentHorizontalAlignmentRight;
+    [sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [sureBtn addTarget:self action:@selector(sureBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sureBtn];
 }
@@ -213,9 +220,14 @@
 #pragma mark - 裁剪
 -(void)clipBtnSelected:(UIButton *)btn
 {
-    LJFPhotoDrawController * VC = [[LJFPhotoDrawController alloc] init];
-    VC.originalImage = [self getSmallImage];
-    [self.navigationController pushViewController:VC animated:YES];
+    if (self.resultBlock) {
+        self.resultBlock([self getSmallImage]);
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        LJFPhotoDrawController * VC = [[LJFPhotoDrawController alloc] init];
+        VC.originalImage = [self getSmallImage];
+        [self.navigationController pushViewController:VC animated:YES];
+    }
 }
 
 #pragma mark - 调整Image 的方形

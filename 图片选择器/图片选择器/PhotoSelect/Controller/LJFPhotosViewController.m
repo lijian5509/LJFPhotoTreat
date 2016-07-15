@@ -85,6 +85,15 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark - 保存图片
 - (void)savePhoto:(UIButton *)sender
 {
+    if (self.selectPhotosArray.count == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"还未选择图片"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     if (self.pickerControl.isSupportMultipleSelect) {//多选
         if (self.pickerControl.finishBlock) {
             self.pickerControl.finishBlock(self.selectPhotosArray);

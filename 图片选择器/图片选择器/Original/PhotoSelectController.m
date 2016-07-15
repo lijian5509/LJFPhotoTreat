@@ -7,8 +7,12 @@
 //
 
 #import "PhotoSelectController.h"
+#import "LJFPhotoClipController.h"
 
 @interface PhotoSelectController ()
+{
+    UIImage *_originalImage;
+}
 
 @end
 
@@ -16,7 +20,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+    self.imageView.userInteractionEnabled = YES;
+    [self.imageView addGestureRecognizer:tap];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)tap:(UITapGestureRecognizer *)tap
+{
+    if (_originalImage) {
+        LJFPhotoClipController *VC = [[LJFPhotoClipController alloc] initWithImage:_originalImage rusult:^(UIImage *image) {
+            _originalImage = image;
+            self.imageView.image = _originalImage;
+        }];
+        [self.navigationController pushViewController:VC animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,6 +51,7 @@
             for (int i = 0; i < resultArray.count; i ++ ) {
                 LJFAssetModel *model = resultArray[i];
                 UIImage *image = [UIImage imageWithCGImage:[model.representation fullScreenImage]];
+                _originalImage = image;
                 [imagesArray addObject:image];
             }
             
@@ -51,10 +70,22 @@
         [self presentViewController:VC animated:YES completion:nil];
     }else{
         LJFPhotoPickerController *VC = [[LJFPhotoPickerController alloc] initWithBlocSingleSelect:^(UIImage *image) {
+            _originalImage = image;
             self.imageView.image = image;
             self.title = @"单选";
         }];
         [self presentViewController:VC animated:YES completion:nil];
     }
+}
+
+
+- (IBAction)leftRotation90:(UIBarButtonItem *)sender {
+    _originalImage = [_originalImage rotate90CounterClockwise];
+    self.imageView.image = _originalImage;
+}
+
+- (IBAction)rightRotation90:(id)sender {
+    _originalImage = [_originalImage rotate90Clockwise];
+    self.imageView.image = _originalImage;
 }
 @end

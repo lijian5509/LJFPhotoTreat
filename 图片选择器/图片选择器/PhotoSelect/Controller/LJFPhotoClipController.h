@@ -32,5 +32,14 @@ typedef enum{
 
 @property (nonatomic, assign)ClipType clipType;  //裁剪的形状
 
--(instancetype)initWithImage:(UIImage *)image;
+/**
+ *  初始化方法
+ *
+ *  @param image  初始化图片
+ *  @param result 回调block 如果不为空裁剪后跳入绘制界面
+ *
+ *  @return return value description
+ */
+-(instancetype)initWithImage:(UIImage *)image
+                      rusult:(void(^)(UIImage *image))result;
 @end

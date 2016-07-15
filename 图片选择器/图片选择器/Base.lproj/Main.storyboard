@@ -58,14 +58,36 @@
                                     <constraint firstAttribute="height" constant="271" id="tPh-ux-nF4"/>
                                 </constraints>
                             </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T5t-QJ-BMK">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="j0j-nu-Htc"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="左90°" id="Lti-ac-4er">
+                                        <connections>
+                                            <action selector="leftRotation90:" destination="BYZ-38-t0r" id="fNe-Ao-hRt"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="WoJ-qp-bjH"/>
+                                    <barButtonItem title="右90°" id="5Ml-cX-xG4">
+                                        <connections>
+                                            <action selector="rightRotation90:" destination="BYZ-38-t0r" id="jVH-Wo-dgX"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="DAe-Ff-5GW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2Yd-Jx-9c5"/>
+                            <constraint firstAttribute="trailing" secondItem="T5t-QJ-BMK" secondAttribute="trailing" id="BWW-pl-1kl"/>
                             <constraint firstItem="00R-pP-zRZ" firstAttribute="top" secondItem="MFs-S2-flM" secondAttribute="bottom" constant="20" id="Htm-Or-4DG"/>
                             <constraint firstItem="MFs-S2-flM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="TVn-se-69Y"/>
                             <constraint firstItem="00R-pP-zRZ" firstAttribute="width" secondItem="MFs-S2-flM" secondAttribute="width" id="Yfh-rr-nRi"/>
+                            <constraint firstItem="T5t-QJ-BMK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aHW-sP-cRE"/>
                             <constraint firstItem="00R-pP-zRZ" firstAttribute="height" secondItem="MFs-S2-flM" secondAttribute="height" id="ffV-34-SCd"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="T5t-QJ-BMK" secondAttribute="bottom" id="kSV-vp-fz1"/>
                             <constraint firstItem="MFs-S2-flM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rWq-Z8-m19"/>
                             <constraint firstItem="DAe-Ff-5GW" firstAttribute="top" secondItem="00R-pP-zRZ" secondAttribute="bottom" constant="34" id="t45-bb-hNy"/>
                             <constraint firstItem="00R-pP-zRZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tpI-ad-58S"/>
