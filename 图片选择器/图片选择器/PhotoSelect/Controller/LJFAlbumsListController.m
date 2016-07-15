@@ -10,6 +10,8 @@
 #import "LJFPhotosViewController.h"
 #import "LJFPhotoOverView.h"
 #import "LJFAlbumTableViewCell.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface LJFAlbumsListController ()<UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,
 UINavigationControllerDelegate,LJFTakePhotoControllerDelegate>
@@ -29,14 +31,38 @@ UINavigationControllerDelegate,LJFTakePhotoControllerDelegate>
 
 - (void)loadData
 {
-    [[LJFPhotoHandle shareInstance] ljf_getAlbumsWithAlbumType:LJFGetAllAlbums
-                                                       success:^(NSArray<LJFAssetsGroupModel *> *alblums) {
-                                                           self.dataArray = alblums;
-                                                           [self.tableView reloadData];
-                                                       }
-                                                          fail:^(NSError *error) {
-                                                              NSLog(@"获取照片资源失败");
-                                                          }];
+    ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
+    if (author == ALAuthorizationStatusRestricted || author == ALAuthorizationStatusDenied)
+        
+    {
+        [LJFAlertView initWithAlertViewWithTitle:@"提示"
+                                            text:@"相册访问权限受限制,是否修改？"
+                                            sure:@"前往"
+                                          cancel:@"取消"
+                                    sureBtnBlock:^(UIButton *defaultBtn) {
+                                        NSURL *url ;
+                                        if ([[[UIDevice currentDevice] systemVersion] floatValue] > 8.0) {
+                                            url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                                        }else{
+                                            NSString *identifier = [[NSBundle mainBundle] bundleIdentifier];
+                                            url = [NSURL URLWithString:[NSString stringWithFormat:@"prefs:root=%@",identifier]];
+                                        }
+                                        if ([[UIApplication sharedApplication] canOpenURL:url])
+                                        {
+                                            [[UIApplication sharedApplication] openURL:url];
+                                        }
+                                        
+                                    } cancelBtnBlock:nil];
+    }else{
+        [[LJFPhotoHandle shareInstance] ljf_getAlbumsWithAlbumType:LJFGetAllAlbums
+                                                           success:^(NSArray<LJFAssetsGroupModel *> *alblums) {
+                                                               self.dataArray = alblums;
+                                                               [self.tableView reloadData];
+                                                           }
+                                                              fail:^(NSError *error) {
+                                                                  NSLog(@"获取照片资源失败");
+                                                              }];
+    }
 }
 
 #pragma mark - 添加导航栏右按钮
@@ -63,10 +89,35 @@ UINavigationControllerDelegate,LJFTakePhotoControllerDelegate>
 #pragma mark - 拍照
 - (void)takePhoto
 {
-    LJFTakePhotoController *VC = [[LJFTakePhotoController alloc] initWithDelegate:self
-                                                             takePhotoOrientation:TakePhotoOrientationRight];
-    VC.backImage = [UIImage imageNamed:@"for0"];
-    [self presentViewController:VC animated:YES completion:nil];
+    NSString *mediaType = AVMediaTypeVideo;
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+    if(authStatus == ALAuthorizationStatusRestricted || authStatus == ALAuthorizationStatusDenied){
+        [LJFAlertView initWithAlertViewWithTitle:@"提示"
+                                            text:@"相机访问权限受限制,是否修改？"
+                                            sure:@"前往"
+                                          cancel:@"取消"
+                                    sureBtnBlock:^(UIButton *defaultBtn) {
+                                        NSURL *url ;
+                                        if ([[[UIDevice currentDevice] systemVersion] floatValue] > 8.0) {
+                                            url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                                        }else{
+                                            NSString *identifier = [[NSBundle mainBundle] bundleIdentifier];
+                                            url = [NSURL URLWithString:[NSString stringWithFormat:@"prefs:root=%@",identifier]];
+                                        }
+                                        if ([[UIApplication sharedApplication] canOpenURL:url])
+                                        {
+                                            [[UIApplication sharedApplication] openURL:url];
+                                        }
+                                    } cancelBtnBlock:nil];
+        
+        return;
+    }else{
+        LJFTakePhotoController *VC = [[LJFTakePhotoController alloc] initWithDelegate:self
+                                                                 takePhotoOrientation:TakePhotoOrientationRight];
+        NSString *imageName = [[NSUserDefaults standardUserDefaults] objectForKey:@"overView"];
+        VC.backImage = [UIImage imageNamed:imageName];
+        [self presentViewController:VC animated:YES completion:nil];
+    }
 //    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
 //    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
 //    imagePicker.showsCameraControls = NO;
