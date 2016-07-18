@@ -208,7 +208,11 @@ typedef void(^ResultBlock)(UIImage *image);
         if((currentFrame.origin.x >= self.circularFrame.origin.x && currentFrame.origin.y >= self.circularFrame.origin.y)
            || (currentFrame.size.width + currentFrame.origin.x < self.circularFrame.origin.x + self.circularFrame.size.width && currentFrame.origin.y >= self.circularFrame.origin.y)
            || (currentFrame.size.height+currentFrame.origin.y < self.circularFrame.origin.y + self.circularFrame.size.height && currentFrame.origin.x >= self.circularFrame.origin.x)
-           || (currentFrame.size.height+currentFrame.origin.y < self.circularFrame.origin.y + self.circularFrame.size.height && currentFrame.size.width + currentFrame.origin.x < self.circularFrame.origin.x + self.circularFrame.size.width))
+           || (currentFrame.size.height+currentFrame.origin.y < self.circularFrame.origin.y + self.circularFrame.size.height && currentFrame.size.width + currentFrame.origin.x < self.circularFrame.origin.x + self.circularFrame.size.width)
+           || currentFrame.origin.y >= self.circularFrame.origin.y + self.circularFrame.size.height
+           || currentFrame.origin.y <= self.circularFrame.origin.y - self.circularFrame.size.height
+           || currentFrame.origin.x >= self.circularFrame.origin.x + self.circularFrame.size.width
+           || currentFrame.origin.x <= self.circularFrame.origin.x - self.circularFrame.size.width)
         {
             [UIView animateWithDuration:0.05 animations:^{
                 view.center = self.view.center;
