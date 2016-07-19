@@ -229,6 +229,9 @@
     if (self.orientation == TakePhotoOrientationRight) {
         view_width  = self.view.frame.size.height;
         view_height = self.view.frame.size.width;
+    }else{
+        view_width  = self.view.frame.size.width;
+        view_height = self.view.frame.size.height;
     }
     [self.view addSubview:self.cameraShowView];
     [self.view addSubview:self.bottomToolBar];
