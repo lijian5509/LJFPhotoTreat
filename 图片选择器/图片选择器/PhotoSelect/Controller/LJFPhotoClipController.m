@@ -205,14 +205,18 @@ typedef void(^ResultBlock)(UIImage *image);
         //坐标转换 相对于当前视图 这样比较精准
         CGRect currentFrame = [self.view convertRect:_imageView.frame toView:self.view];
         //超出四个角居中 以四个角为界限，只要超出一角就要默认居中
-        if((currentFrame.origin.x >= self.circularFrame.origin.x && currentFrame.origin.y >= self.circularFrame.origin.y)
-           || (currentFrame.size.width + currentFrame.origin.x < self.circularFrame.origin.x + self.circularFrame.size.width && currentFrame.origin.y >= self.circularFrame.origin.y)
-           || (currentFrame.size.height+currentFrame.origin.y < self.circularFrame.origin.y + self.circularFrame.size.height && currentFrame.origin.x >= self.circularFrame.origin.x)
-           || (currentFrame.size.height+currentFrame.origin.y < self.circularFrame.origin.y + self.circularFrame.size.height && currentFrame.size.width + currentFrame.origin.x < self.circularFrame.origin.x + self.circularFrame.size.width)
-           || currentFrame.origin.y >= self.circularFrame.origin.y + self.circularFrame.size.height
-           || currentFrame.origin.y <= self.circularFrame.origin.y - self.circularFrame.size.height
-           || currentFrame.origin.x >= self.circularFrame.origin.x + self.circularFrame.size.width
-           || currentFrame.origin.x <= self.circularFrame.origin.x - self.circularFrame.size.width)
+        if((CGRectGetMinX(currentFrame) >= CGRectGetMinX(self.circularFrame)
+            && CGRectGetMinY(currentFrame) >= CGRectGetMinY(self.circularFrame))//左上角
+           || (CGRectGetMaxX(currentFrame) < CGRectGetMaxX(self.circularFrame)
+               && CGRectGetMinY(currentFrame) >= CGRectGetMinY(self.circularFrame))//右上角
+           || (CGRectGetMaxY(currentFrame) < CGRectGetMaxY(self.circularFrame)
+               && CGRectGetMinX(currentFrame) >= CGRectGetMinX(self.circularFrame))//左下角
+           || (CGRectGetMaxY(currentFrame) < CGRectGetMaxY(self.circularFrame)
+               && CGRectGetMaxX(currentFrame) < CGRectGetMaxX(self.circularFrame)) //右下角
+           || CGRectGetMinY(currentFrame) >= CGRectGetMaxY(self.circularFrame) - 120   //上边界
+           || CGRectGetMaxY(currentFrame) <= CGRectGetMinY(self.circularFrame) + 120   //下边界
+           || CGRectGetMinX(currentFrame) >= CGRectGetMaxX(self.circularFrame) - 160  //左边界
+           || CGRectGetMaxX(currentFrame) <= CGRectGetMinX(self.circularFrame) + 160)   //右边界
         {
             [UIView animateWithDuration:0.05 animations:^{
                 view.center = self.view.center;

@@ -39,8 +39,9 @@
         CGSize size = [self calculateViewFitSizeWithImage:self.originalImage
                                                 planWidth:ScreenWidth
                                                planHeight:ScreenHeight];
-        _imageView.frame = CGRectMake(0, 0, size.width, size.height);
-        _imageView.center = self.view.center;
+        //width 和 height 一定是整数 因为小数点原因会导致绘制图片变形
+        _imageView.frame = CGRectMake(0, 0, (int)size.width, (int)size.height);
+        _imageView.center = CGPointMake(ScreenWidth/2.0, ScreenHeight/2.0);
         _imageView.contentMode = UIViewContentModeScaleToFill;
     }
     return _imageView;
@@ -64,7 +65,7 @@
 - (void)configData
 {
     self.imageView.brush = [[LJFPencilBrush alloc] init];
-    self.imageView.strokeWidth = 5.0;
+    self.imageView.strokeWidth = 10.0;
     self.imageView.strokeColor = [UIColor whiteColor];
     self.imageView.image = self.fixedImage;
     self.imageView.realImage = nil;

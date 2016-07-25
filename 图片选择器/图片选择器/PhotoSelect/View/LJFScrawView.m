@@ -24,8 +24,6 @@ typedef enum : NSUInteger {
  */
 @property (nonatomic) DrawingState drawingState;
 
-@property (nonatomic) CGRect imageRect;
-
 @end
 
 @implementation LJFScrawView
@@ -54,7 +52,6 @@ typedef enum : NSUInteger {
     self.strokeColor = [UIColor greenColor];
     self.contentMode = UIViewContentModeScaleToFill;
     self.userInteractionEnabled = YES;
-    self.imageRect   = [self getFrameSizeForImage:self.image inImageView:self];
     [self drawingImage];
 }
 
